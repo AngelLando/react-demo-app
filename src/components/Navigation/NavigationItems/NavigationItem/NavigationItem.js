@@ -5,7 +5,7 @@ import classes from './NavigationItem.module.css';
 
 const NavigationItem = (props) => (
     <li className={classes.NavigationItem}>
-        <NavLink to={props.link} activeClassName={classes.active}>{props.children}</NavLink>
+        <NavLink to={props.link} exact activeClassName={classes.active}>{props.children}</NavLink>
     </li>
 );
 
