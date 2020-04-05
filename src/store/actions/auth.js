@@ -50,11 +50,11 @@ export const auth = (email, password, isSignUp) => {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCrtpTQ9zvM5ZzgQSZp-uGO5PEw1qL5ATg';
         }
         axios.post(url, authData)
-            .then(res => {
-                dispatch(authSuccess(res.data.idToken, res.data.localId));
-                dispatch(checkAuthTimeout(res.data.expiresIn));
+            .then(response => {                
+                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(response.data.expiresIn));
             })
-            .catch(err => {
+            .catch(err => {                
                 dispatch(authFail(err.response.data.error));
             });
     };
