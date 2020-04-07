@@ -3,7 +3,7 @@ import React from 'react';
 import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 
-const OrderSummary = (props) => {
+const OrderSummary = props => {
     const ingredientsSummary = Object.keys(props.ingredients).map(key => {
         return (
             <li key={key}>
