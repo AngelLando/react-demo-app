@@ -6,10 +6,13 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import ErrorHandler from '../../hoc/ErrorHandler/ErrorHandler';
+import classes from './BurgerBuilder.module.css';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
+
+import { Spin } from 'antd';
+import 'antd/dist/antd.css'; 
 
 const BurgerBuilder = props => {
     const [purchasing, setPurchasing] = useState(false);
@@ -57,7 +60,7 @@ const BurgerBuilder = props => {
 
     let orderSummary = null;
 
-    let burger = props.error ? <p>Les ingrédients ne peuvent pas être chargés!</p> : <Spinner />;
+    let burger = props.error ? <p>Les ingrédients ne peuvent pas être chargés!</p> : <Spin className={classes.Spin} size="large" />;
     
     if(props.ings) {
         burger = (

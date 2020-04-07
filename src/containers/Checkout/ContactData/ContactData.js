@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
-import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 import ErrorHandler from '../../../hoc/ErrorHandler/ErrorHandler';
 import * as actions from '../../../store/actions/index';
 import { updateObject, checkValidity } from '../../../shared/utility';
+
+import { Card, Spin } from 'antd';
+import 'antd/dist/antd.css';
 
 const ContactData = props => {
     const [orderForm, setOrderForm] = useState({
@@ -81,8 +83,8 @@ const ContactData = props => {
             elementType: 'select',
             elementConfig: {
                 options: [
-                    {value: 'fastest', displayValue: 'La plus rapide'},
-                    {value: 'cheapest', displayValue: 'La moins chère'}
+                    {value: 'fastest', displayValue: 'Livraison la plus rapide'},
+                    {value: 'cheapest', displayValue: 'Livraison la moins chère'}
                 ]
             },
             value: 'fastest',
@@ -147,17 +149,17 @@ const ContactData = props => {
                     changed={(event) => inputChangedHandler(event, formElement.id)}
                 />
             ))}
-            <Button btnType="Success" disabled={!formIsValid}>Commander</Button>
+            <Button btnType="Primary" disabled={!formIsValid}>Commander</Button>
         </form>
     );
     if(props.loading) {
-        form = <Spinner />;
+        form = <Spin className={classes.Spin} size="large" />;
     }
     return (
-        <div className={classes.ContactData}>
-            <h4>Entrez vos informations</h4>
+        <Card className={classes.ContactData}>
+            <h3><strong>Entrez vos informations</strong></h3>
             {form}
-        </div>
+        </Card>
     );
 }
 

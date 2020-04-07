@@ -13,15 +13,13 @@ const OrderSummary = props => {
     
     return (
         <Aux>
-            <h3>Votre commande</h3>
-            <p>Vos ingrédients:</p>
+            <h3><strong>Votre commande</strong></h3>
             <ul>
                 {ingredientsSummary}
             </ul>
-            <p><strong>Total price: {props.price}</strong></p>
-            <p>Payer?</p>
-            <Button btnType="Danger" clicked={props.purchaseCancelled}>Annuler</Button>
-            <Button btnType="Success" clicked={props.purchaseContinued}>Continuer</Button>
+            <p><strong>Total:</strong> CHF {props.price}</p>
+            <Button btnType="Default" clicked={props.purchaseCancelled}>Annuler</Button>
+            <Button btnType="Primary" clicked={props.purchaseContinued}>Continuer</Button>
         </Aux>
     );
 };

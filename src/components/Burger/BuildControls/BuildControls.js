@@ -3,6 +3,9 @@ import React from 'react';
 import classes from './BuildControls.module.css';
 import BuildControl from './BuildControl/BuildControl';
 
+import { Button } from 'antd';
+import 'antd/dist/antd.css';
+
 const controls = [
     {label: 'Salad', type: 'salad'},
     {label: 'Bacon', type: 'bacon'},
@@ -12,7 +15,7 @@ const controls = [
 
 const BuildControls = (props) => (
     <div className={classes.BuildControls}>
-        <p>Prix: <strong>{props.price.toFixed(2)}</strong></p>
+        <p><strong>CHF {props.price.toFixed(2)}</strong></p>
         {controls.map(ctrl => (
             <BuildControl
                 key={ctrl.label}
@@ -21,10 +24,11 @@ const BuildControls = (props) => (
                 removed={() => props.ingredientRemoved(ctrl.type)}
                 disabled={props.disabled[ctrl.type]} />
         ))}
-        <button
-            className={classes.OrderButton}
+        <Button
+            className={classes.Button}
+            type="primary"
             disabled={!props.purchasable}
-            onClick={props.ordered}>{props.isAuth ? 'Commander' : 'Inscrivez-vous pour commander'}</button>
+            onClick={props.ordered}>{props.isAuth ? 'Commander' : 'Inscrivez-vous pour commander'}</Button>
     </div>
 );
 

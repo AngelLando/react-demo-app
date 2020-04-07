@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import ErrorHandler from '../../hoc/ErrorHandler/ErrorHandler';
+import classes from './Orders.module.css';
 import * as actions from '../../store/actions/index';
-import Spinner from '../../components/UI/Spinner/Spinner';
+
+import { Spin } from 'antd';
+import 'antd/dist/antd.css';
 
 const Orders = props => {
     const { onFetchOrders, token, userId } = props;
@@ -14,7 +17,7 @@ const Orders = props => {
         onFetchOrders(token, userId);
     }, [onFetchOrders, token, userId]);
 
-    let orders = <Spinner />;
+    let orders = <Spin className={classes.Spin} size="large" />;
     if(!props.loading) {
         orders = props.orders.map(order => (
             <Order key={order.id} ingredients={order.ingredients} price={+order.price} />

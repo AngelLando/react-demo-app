@@ -4,10 +4,12 @@ import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
+
+import { Card, Spin } from 'antd';
+import 'antd/dist/antd.css';
 
 const Auth = props => {
     const [authForm, setAuthForm] = useState({
@@ -91,7 +93,7 @@ const Auth = props => {
     ));
 
     if(props.loading) {
-        form = <Spinner />
+        form = <Spin className={classes.Spin} size="medium" />
     }
 
     let errorMessage = null;
@@ -108,19 +110,19 @@ const Auth = props => {
     }
 
     return(
-        <div className={classes.Auth}>
+        <Card className={classes.Auth}>
             {authRedirect}
             {errorMessage}
-            <h2>{isSignup ? "Inscription" : "Connexion"}</h2>
+            <h3><strong>{isSignup ? "Inscription" : "Connexion"}</strong></h3>
             <form onSubmit={submitHandler}>
                 {form}
-                <Button btnType="Success">Envoyer</Button>
+                <Button btnType="Primary">{isSignup ? 'S\'inscrire' : 'Se connecter' }</Button>
             </form>
             <Button
                 clicked={switchAuthModeHandler}
-                btnType="Danger">Aller à la page {isSignup ? 'de connexion' : 'd\'inscription'}
+                btnType="Default">Aller à la page {isSignup ? 'de connexion' : 'd\'inscription'}
             </Button>
-        </div>
+        </Card>
     );
 }
 

@@ -2,6 +2,9 @@ import React from 'react';
 
 import classes from './Order.module.css';
 
+import { Card, Timeline } from 'antd';
+import 'antd/dist/antd.css';
+
 const Order = (props) => {
     const ingredients = [];
 
@@ -15,14 +18,25 @@ const Order = (props) => {
     }
 
     const ingredientOutput = ingredients.map(ig => {
-        return <span style={{textTransform: 'capitalize', display: 'inline-block', margin: '0 8px', border: '1px solid #ccc', padding: '5px'}} key={ig.name}>{ig.name} ({ig.amount})</span>
+        return (
+            <li key={ig}>
+                <span style={{textTransform: 'capitalize'}}>{ig.name}: {ig.amount}</span>
+            </li>
+        );
     });
 
     return (
-        <div className={classes.Order}>
-            <p>Ingrédients: {ingredientOutput}</p>
-            <p>Prix: CHF {props.price.toFixed(2)}</p>
-        </div>
+        <Card className={classes.Order}>
+        <h3><strong>Etat</strong></h3>
+        <br />
+        <Timeline pending="En préparation...">
+          <Timeline.Item color="green">Commande reçue</Timeline.Item>
+        </Timeline>
+        <h3><strong>Résumé</strong></h3>
+        <ul>{ingredientOutput}</ul>
+        <h3><strong>Prix total</strong></h3>
+        <p><strong>CHF {props.price.toFixed(2)}</strong></p>
+        </Card>
     );
 
 };
