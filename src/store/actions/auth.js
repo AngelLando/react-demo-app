@@ -81,12 +81,12 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const exp = new Date(localStorage.getItem('exp'));
-            if(exp > new Date()) {
+            if(exp < new Date()) {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch(checkAuthTimeout(exp.getSeconds() - new Date().getSeconds()));
+                dispatch(checkAuthTimeout((exp.getTime() - new Date().getTime()) / 1000));
             }
         }
     };
